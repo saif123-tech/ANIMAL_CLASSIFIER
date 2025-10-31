@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Classifier</title>
+    <link rel="icon" type="image/svg+xml" href="frontend/favicon.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="frontend/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="app-title">
+                        <span class="title-icon">🐾</span>
+                        Animal Classifier
+                    </h1>
+                    <p class="app-subtitle">AI-powered animal and breed identification</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <div class="container">
+                <!-- Upload Section -->
+                <section class="upload-section">
+                    <div class="upload-card">
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-content">
+                                <div class="upload-icon">
+                                    <i class="bi bi-cloud-upload"></i>
+                                </div>
+                                <h3 class="upload-title">Upload an image</h3>
+                                <p class="upload-description">Drag and drop or click to select</p>
+                                <input type="file" id="image-upload" class="form-control d-none" accept="image/*">
+                                <button class="btn btn-primary btn-upload"
+                                    onclick="document.getElementById('image-upload').click()">
+                                    <i class="bi bi-upload me-2"></i>Choose Image
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div id="image-preview-container" class="image-preview-container d-none">
+                            <div class="preview-wrapper">
+                                <img id="image-preview" class="image-preview" alt="Preview">
+                                <button class="btn btn-remove" onclick="removeImage()" title="Remove image">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analyze Button -->
+                    <div class="analyze-section">
+                        <button id="predict-button" class="btn btn-primary btn-analyze" disabled>
+                            <i class="bi bi-search me-2"></i>Analyze Image
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Prediction Result -->
+                <section id="result-container" class="result-section d-none">
+                    <div class="prediction-card">
+                        <div class="prediction-header">
+                            <div class="ai-indicator">
+                                <i class="bi bi-robot"></i>
+                                <span>AI Analysis</span>
+                            </div>
+                        </div>
+
+                        <div class="prediction-content">
+                            <!-- Main Class Display -->
+                            <div id="main-class-display" class="main-class-display">
+                                <div class="class-emoji" id="class-emoji"></div>
+                                <div class="class-text">
+                                    <div class="main-class-label" id="main-class-label"></div>
+                                </div>
+                            </div>
+
+                            <!-- Breed Display -->
+                            <div id="breed-display" class="breed-display d-none">
+                                <div class="breed-arrow">→</div>
+                                <div class="breed-text">
+                                    <div class="breed-name" id="breed-name"></div>
+                                    <div class="confidence-text" id="confidence-text"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="prediction-actions">
+                            <button id="copy-breed-btn" class="btn btn-outline-primary btn-sm d-none">
+                                <i class="bi bi-clipboard me-1"></i>Copy Breed
+                            </button>
+                            <button id="show-feedback-btn" class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-chat-dots me-1"></i>Report Incorrect
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Section -->
+                    <div id="feedback-card" class="feedback-card collapse">
+                        <div class="feedback-header">
+                            <h6>Help improve the model</h6>
+                            <p>What animal is this actually?</p>
+                        </div>
+                        <div class="feedback-form">
+                            <select id="correction-dropdown" class="form-select">
+                                <option value="">Select correct class...</option>
+                            </select>
+                            <button id="submit-correction" class="btn btn-success">
+                                <i class="bi bi-check me-1"></i>Submit Correction
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Toast Container -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <!-- jQuery + Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="frontend/scripts.js"></script>
+</body>
+
+</html>
